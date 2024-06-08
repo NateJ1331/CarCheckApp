@@ -1,24 +1,36 @@
 import React , {useState} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput} from 'react-native';
+import moment from 'moment/moment';
 
 export default function App() {
-  const [date, setDate] = useState('01/11/2000')
+  const [date1, setDate1] = useState('01/01/2000')
+  const [date2, setDate2] = useState('01/01/2000')    
+  const [totaldays,setTotalDays] = useState(0)
+  const today = new Date(date1)
 
-  const clickHandler = () => {
-    setDate('10/15/2033');
+  function CalculateDate(weeklymiles)
+  {
+
+    dailymiles = weeklymiles/7
+    totaldays = 6300/dailymiles
+
+    return totaldays
+
   }
-
+  
+  
   return (
     <View style={styles.container}>
-      <Text>The Date is {date}</Text>
+      <Text>When did you last change your oil?{/*you should change it ~6200 miles */}</Text>
       <Text></Text>
-      <View style={styles.input}>
-        <TextInput/>
-      </View>
-      <View style ={styles.buttonContainer}>
-        <Button title = 'Change Date' onPress={clickHandler} />
-      </View>
+      <TextInput style={styles.input}/>      
+      <Text></Text>
+      <Text>On average How many miles do you drive a week?</Text>
+      <Text></Text>
+      <TextInput style={styles.input}/> 
+      <Text></Text>
+      <Text>You should change your oil by: {moment(date1,"MMDDYYYY").add(10, 'days').calendar()}</Text>     
+
     </View>
   );
 }
@@ -26,16 +38,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  buttonContainer : {
-    marginTop: 20
-  },
-
   input : {
-    borderStyle : 'solid',
+    width: 150,
+    borderColor: "black",
+    backgroundColor: "white",
   }
 });
