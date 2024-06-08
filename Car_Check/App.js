@@ -3,34 +3,27 @@ import { StyleSheet, Text, View, TextInput} from 'react-native';
 import moment from 'moment/moment';
 
 export default function App() {
-  const [date1, setDate1] = useState('01/01/2000')
-  const [date2, setDate2] = useState('01/01/2000')    
-  const [totaldays,setTotalDays] = useState(0)
-  const today = new Date(date1)
+  const [date, setDate] = useState('01/01/2000')    
+  const [totaldays,setTotalDays] = useState(1)
 
   function CalculateDate(weeklymiles)
   {
-
     dailymiles = weeklymiles/7
-    totaldays = 6300/dailymiles
-
-    return totaldays
-
+    setTotalDays(Math. trunc(6250/dailymiles))
   }
   
   
   return (
     <View style={styles.container}>
-      <Text>When did you last change your oil?{/*you should change it ~6200 miles */}</Text>
+      <Text>When did you last change your oil?{/*you should change it ~6250 miles */}</Text>
       <Text></Text>
-      <TextInput style={styles.input}/>      
+      <TextInput style={styles.input} keyboardType='numeric' onSubmitEditing={(value) => setDate(value.nativeEvent.text)}/>      
       <Text></Text>
       <Text>On average How many miles do you drive a week?</Text>
       <Text></Text>
-      <TextInput style={styles.input}/> 
+      <TextInput style={styles.input} keyboardType="numeric" onSubmitEditing={(value) => CalculateDate(value.nativeEvent.text)}/> 
       <Text></Text>
-      <Text>You should change your oil by: {moment(date1,"MMDDYYYY").add(10, 'days').calendar()}</Text>     
-
+      <Text>You should change your oil by: {moment(date,"MMDDYYYY").add(totaldays, 'days').calendar()}</Text>     
     </View>
   );
 }
@@ -38,8 +31,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingLeft: 50,
+    paddingBottom: 150,
     backgroundColor: '#eee',
-    alignItems: 'center',
+    alignItems: 'left',
     justifyContent: 'center',
   },
 
