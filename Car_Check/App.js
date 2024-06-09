@@ -8,12 +8,14 @@ export default function App() {
   const [date, setDate] = useState('01/01/2000')    
   const [totaldays,setTotalDays] = useState(1)
 
+  //Caculates how many miles you dirve per day and divides average miles needed before tire/ oil changes
   function CalculateDate(weeklymiles,miles)
   {
     dailymiles = weeklymiles/7
     setTotalDays(Math. trunc(miles/dailymiles))
   }
 
+  //Home with Button menu
   function HomeScreen({navigation}) {
 
     return (
@@ -38,6 +40,7 @@ export default function App() {
     );
   }
 
+  //oil check screen
   function OilScreen() {
     return (
       <View style={styles.container}>
@@ -53,7 +56,7 @@ export default function App() {
       </View>
     );
   }
-
+    //Tires Screen
     function RotateScreen() {
       return (
         <View style={styles.container}>
@@ -71,7 +74,7 @@ export default function App() {
     }
   
   const Stack = createNativeStackNavigator();
-
+  //Navigation handling
   return (
     <NavigationContainer>{
       <Stack.Navigator initialRouteName= "Home">
@@ -83,6 +86,7 @@ export default function App() {
   );
 }
 
+//Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
